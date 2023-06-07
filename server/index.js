@@ -10,10 +10,6 @@ const upload = multer({ dest: 'uploads/' });
 
 app.use(cors());
 app.use(express.static(path.join(__dirname, '../client/build')));
-
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../client/build/index.html'));
-});
     
 app.get('/api/data', (req, res) => {
     const csvFilePath = path.join(__dirname, 'data.csv');
@@ -29,6 +25,10 @@ app.get('/api/data', (req, res) => {
     } else {
     res.status(404).send('No CSV file found');
     }
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build/index.html'));
 });
     
 const PORT = process.env.PORT || 3001;
