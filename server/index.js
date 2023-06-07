@@ -4,7 +4,6 @@ const multer = require('multer');
 const csvParser = require('csv-parser');
 const fs = require('fs');
 const cors = require('cors');
-const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const app = express();
 const upload = multer({ dest: 'uploads/' });
@@ -19,32 +18,11 @@ app.use(cors());
 app.use('/api', createProxyMiddleware(proxyOptions));
 app.use(express.static(path.join(__dirname, '../client/build')));
 
-app.post('/upload', upload.single('file'), (req, res) => {
-    const file = req.file;
-    const results = [];
-  
-    if (file) {
-      const tempPath = req.file.path;
-      const targetPath = path.join('uploads', 'data.csv');
-  
-      fs.rename(tempPath, targetPath, (err) => {
-        if (err) {
-          console.error(err);
-          res.status(500).send('Error processing file');
-        } else {
-          res.status(200).send('File uploaded and processed');
-        }
-      });
-    } else {
-      res.status(400).send('No file uploaded');
-    }
-  });
-
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/build/index.html'));
-  });
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build/index.html'));
+});
     
-app.get('/data', (req, res) => {
+app.get('/api/data', (req, res) => {
     const csvFilePath = path.join(__dirname, 'data.csv');
     const results = [];
 
