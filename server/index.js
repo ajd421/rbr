@@ -9,7 +9,7 @@ const app = express();
 const upload = multer({ dest: 'uploads/' });
 
 app.use(cors());
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, '../client/build')));
 
 app.post('/upload', upload.single('file'), (req, res) => {
     const file = req.file;
@@ -30,6 +30,10 @@ app.post('/upload', upload.single('file'), (req, res) => {
     } else {
       res.status(400).send('No file uploaded');
     }
+  });
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/build/index.html'));
   });
     
 app.get('/data', (req, res) => {
