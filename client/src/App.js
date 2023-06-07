@@ -53,7 +53,7 @@ function MyComponent() {
   const [openInfoWindowIndex, setOpenInfoWindowIndex] = useState(null);
 
   useEffect(() => {
-    fetch("http://localhost:3001/data")
+    fetch("/api/data")
       .then((res) => res.json())
       .then((data) => {
         // Add additional properties to each marker

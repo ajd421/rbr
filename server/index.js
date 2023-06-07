@@ -4,11 +4,19 @@ const multer = require('multer');
 const csvParser = require('csv-parser');
 const fs = require('fs');
 const cors = require('cors');
+const { createProxyMiddleware } = require('http-proxy-middleware');
 
 const app = express();
 const upload = multer({ dest: 'uploads/' });
 
+const proxyOptions = {
+  target: 'https://rbrfinder.herokuapp.com/',
+  changeOrigin: true,
+  secure: false,
+};
+
 app.use(cors());
+app.use('/api', createProxyMiddleware(proxyOptions));
 app.use(express.static(path.join(__dirname, '../client/build')));
 
 app.post('/upload', upload.single('file'), (req, res) => {
