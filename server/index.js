@@ -45,7 +45,7 @@ app.post('/upload', upload.single('file'), (req, res) => {
   });
     
 app.get('/data', (req, res) => {
-    const csvFilePath = path.join('uploads', 'data.csv');
+    const csvFilePath = path.join(__dirname, 'data.csv');
     const results = [];
 
     if (fs.existsSync(csvFilePath)) {
