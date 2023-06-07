@@ -8,14 +8,7 @@ const cors = require('cors');
 const app = express();
 const upload = multer({ dest: 'uploads/' });
 
-const proxyOptions = {
-  target: 'https://rbrfinder.herokuapp.com/',
-  changeOrigin: true,
-  secure: false,
-};
-
 app.use(cors());
-app.use('/api', createProxyMiddleware(proxyOptions));
 app.use(express.static(path.join(__dirname, '../client/build')));
 
 app.get('*', (req, res) => {
