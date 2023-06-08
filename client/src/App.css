@@ -5,6 +5,13 @@
   text-align: center; /* Center the text */
 }
 
+.footer {
+  background-color: rgb(77, 160, 188);
+  color: #fff;
+  padding: 10px;
+  text-align: right; /* Center the text */
+}
+
 .App {
   text-align: center;
 }

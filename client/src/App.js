@@ -1,6 +1,7 @@
 import './App.css';
 import React, { useCallback, useEffect, useState } from 'react';
 import { GoogleMap, useJsApiLoader, MarkerF, BicyclingLayerF, InfoWindowF} from '@react-google-maps/api';
+import { Modal, Button, Input} from 'antd';
 
 
 const containerStyle = {
@@ -36,6 +37,15 @@ function Header() {
     <div className='header'>
       <h1>Rice University's Bike Rack Finder</h1>
       <h3>Looking for a bike rack next to a campus building? Look no further</h3>
+    </div>
+  );
+}
+
+function Footer() {
+  return (
+    <div className='footer'>
+      <h3>Created by Alton Dillon</h3>
+      <h4>Avid micromobility advocate</h4>
     </div>
   );
 }
@@ -135,6 +145,7 @@ function MyComponent() {
       ) : (
         <div>Loading...</div>
       )}
+      <Footer />
     </div>
   );
 }
